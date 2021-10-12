@@ -1,0 +1,28 @@
+graphdoc - Documentando nuestra api
+Cuando definimos un schema y gracias a herramientas como Playground e introspection podemos ver que recursos tenemos disponible, a veces es necesario agregar un poco más de información o documentación en general a nuestro proyecto para hacer esto simplemente tenemos que agregar esta información extra a nuestras funciones objetos u atributos y con esto ya podríamos ver información nueva en el playground.
+
+const typeDefs = gql`
+ type Query {
+   """Lista los aeropuertos disponibles"""
+   listarAeropuertos: [Aeropuerto],
+   listarConexiones("""Nombre del aeropuerto"""aeropuerto: String!): [Aeropuerto]
+ }
+
+ type Aeropuerto {
+   """ Ciudad donde se ubica el aeropuerto """
+   nombre: String!
+   conexiones: [Aeropuerto]
+ }
+`;
+Pero como ya hemos visto una de las recomendaciones de seguridad es que estas dos herramientas no se queden habilitadas en producción por lo que de alguna manera tenemos que poder extraer esa documentación y publicarla para que pueda ser utilizada por terceros, y para ello tenemos la siguiente herramienta.
+
+Graphdoc
+
+https://github.com/2fd/graphdoc
+
+Para empezar la instalaremos usando el siguiente comando
+
+npm install -g @2fd/graphdoc
+Y luego llamando al siguiente comando podremos generar nuestra documentación para publicarla en nuestro servidor
+
+graphdoc -e http://localhost:4000/graphql -o ./doc/schema

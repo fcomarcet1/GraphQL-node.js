@@ -1,0 +1,9 @@
+Deshabilitar autocompletado y ver schemas en prod
+ en index.js modificamos la config de ApolloServer 
+
+ const server = new ApoloServer({
+     typeDefs,
+     resolvers,
+     introspections: false,
+     playground: false
+ });
